@@ -1,5 +1,3 @@
-console.log('Hello');
-
 const BASE_URL = 'https://restcountries.com';
 
 export const fetchCountries = name => {

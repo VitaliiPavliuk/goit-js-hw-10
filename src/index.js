@@ -1,6 +1,8 @@
 import './css/styles.css';
 import { fetchCountries } from './js/fetchCountries';
 
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+
 var debounce = require('lodash.debounce');
 
 const DEBOUNCE_DELAY = 300;
@@ -19,7 +21,9 @@ const onInput = event => {
     fetchCountries(country)
       .then(data => {
         if (data.length > 10) {
-          alert('Too many matches found. Please enter a more specific name.');
+          Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
         }
 
         if (data.length >= 2 && data.length <= 10) {
@@ -40,7 +44,7 @@ const onInput = event => {
       })
       .catch(err => {
         if (err.message === '404') {
-          alert('Oops, there is no country with that name');
+          Notify.failure('Oops, there is no country with that name');
         }
       });
   }
